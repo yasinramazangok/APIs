@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieApi.Application.Features.CQRSDesignPattern.Handlers.MovieHandlers
+namespace MovieApi.Application.Features.CQRS.Handlers.MovieHandlers
 {
     public class UpdateMovieCommandHandler
     {
