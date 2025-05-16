@@ -1,13 +1,13 @@
-﻿using System;
+﻿using MediatR;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieApi.Domain.Entities
+namespace MovieApi.Application.Features.Mediator.Commands.CastCommands
 {
-    public class Cast
+    public class UpdateCastCommand : IRequest
     {
         public int CastId { get; set; }
         public string Role { get; set; }
