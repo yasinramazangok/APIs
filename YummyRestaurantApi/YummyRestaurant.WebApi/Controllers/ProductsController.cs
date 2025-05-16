@@ -3,6 +3,8 @@ using YummyRestaurant.WebApi.Entities;
 using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using YummyRestaurant.WebApi.Dtos.ProductDtos;
+using Microsoft.EntityFrameworkCore;
 
 namespace YummyRestaurant.WebApi.Controllers
 {
@@ -28,6 +30,13 @@ namespace YummyRestaurant.WebApi.Controllers
             return Ok(products);
         }
 
+        [HttpGet("GetProductListWithCategory")]
+        public IActionResult GetProductListWithCategory()
+        {
+            var products = _context.Products.Include(x => x.Category).ToList(); 
+            return Ok(_mapper.Map<List<ResultProductWithCategoryDto>>(products));
+        }
+
         [HttpGet("GetProductById")]
         public IActionResult GetProductById(int id)
         {
@@ -50,6 +59,15 @@ namespace YummyRestaurant.WebApi.Controllers
                 return Ok("Ürün ekleme işlemi başarılı!");
             }
             //return Ok(new { message = "Ürün ekleme işlemi başarılı!", data = product });
+        }
+
+        [HttpPost("CreateProductWithCategory")]
+        public IActionResult CreateProductWithCategory(CreateProductDto createProductDto)
+        {
+            var product = _mapper.Map<Product>(createProductDto);
+            _context.Products.Add(product);
+            _context.SaveChanges();
+            return Ok("Ürün ekleme işlemi başarılı!");
         }
 
         [HttpDelete]
