@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using YummyRestaurant.WebApi.Contexts;
 using YummyRestaurant.WebApi.Entities;
-
+// <--------------- This is the example controller for the project. --------------->
 namespace YummyRestaurant.WebApi.Controllers
 {
     // This sets the base route to "api/Categories"
