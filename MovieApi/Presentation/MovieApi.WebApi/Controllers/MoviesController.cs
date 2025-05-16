@@ -26,17 +26,17 @@ namespace MovieApi.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> MovieList()
+        public async Task<IActionResult> GetMovieList()
         {
-            var movie = await _getMovieQueryHandler.Handle();
-            return Ok(movie);
+            var movies = await _getMovieQueryHandler.Handle();
+            return Ok(movies);
         }
 
         [HttpGet("GetMovieById")]
         public async Task<IActionResult> GetMovieById(int id)
         {
-            var value = await _getMovieByIdQueryHandler.Handle(new GetMovieByIdQuery(id));
-            return Ok(value);
+            var movie = await _getMovieByIdQueryHandler.Handle(new GetMovieByIdQuery(id));
+            return Ok(movie);
         }
 
         [HttpPost]
