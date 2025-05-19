@@ -20,8 +20,8 @@ namespace YummyRestaurant.WebUI.ViewComponents
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(jsonData);
-                return View(values);
+                var categories = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(jsonData);
+                return View(categories);
             }
             return View();
         }
