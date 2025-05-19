@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using YummyRestaurant.WebUI.Dtos.ProductDtos;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using YummyRestaurant.WebUI.Dtos.ServiceDtos;
 
 namespace YummyRestaurant.WebUI.ViewComponents
 {
-    public class DefaultServiceComponentPartial : ViewComponent
+    public class DefaultMenuProductComponentPartial : ViewComponent
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public DefaultServiceComponentPartial(IHttpClientFactory httpClientFactory)
+        public DefaultMenuProductComponentPartial(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
@@ -16,12 +16,12 @@ namespace YummyRestaurant.WebUI.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7169/api/Services/");
+            var responseMessage = await client.GetAsync("https://localhost:7169/api/Products/");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var services = JsonConvert.DeserializeObject<List<ResultServiceDto>>(jsonData);
-                return View(services);
+                var values = JsonConvert.DeserializeObject<List<ResultProductDto>>(jsonData);
+                return View(values);
             }
             return View();
         }
